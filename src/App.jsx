@@ -1,9 +1,11 @@
-// import { useState } from 'react'
+import React from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
 import {useState} from 'react'
+
+export const ExpensesContext = React.createContext()
 
 const DUMMY_EXPENSES = [
   {
@@ -37,8 +39,10 @@ function App() {
   
   return (
     <div>
+    <ExpensesContext.Provider value={{expenses, setExpenses}}>
       <NewExpense onAddExpense={addExpenseHandler}/>
       <Expenses items = {expenses}/>
+    </ExpensesContext.Provider>
     </div>
   );
 }

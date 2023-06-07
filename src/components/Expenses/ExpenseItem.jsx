@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
-// import { useState } from 'react'
+import { ExpensesContext } from '../../App'
+import { useContext } from 'react'
 import './ExpenseItem.css'
 import ExpenseDate from './ExpenseDate'
 import Card from '../UI/Card'
 function ExpenseItem(props) {
+
+    const {expenses, setExpenses} = useContext(ExpensesContext)
+
     const onDeleteHandler = (id) => {
         if (confirm("Delete Item?") === true) {
-            console.log("Not yet implimented ItemId:" + id)
+            setExpenses(expenses.filter((expense)=>expense.id != id))
         }
     }
     
