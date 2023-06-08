@@ -24,20 +24,6 @@
     margin: 0 1rem;
     color: white;
   }
-
-  .expense-item button {
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    background-color: #40005d;
-    border: 1px solid white;
-    padding: 0.5rem;
-    border-radius: 12px;
-  }
-
-  .expense-item button:hover {
-    background-color: #BBACC1;
-  }
   
   .expense-item__price {
     font-size: 1rem;

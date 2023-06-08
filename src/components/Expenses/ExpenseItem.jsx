@@ -4,6 +4,9 @@ import { useContext } from 'react'
 import './ExpenseItem.css'
 import ExpenseDate from './ExpenseDate'
 import Card from '../UI/Card'
+import {Button} from '@mui/material'
+import UpdateModal from './UpdateModal'
+
 function ExpenseItem(props) {
 
     const {expenses, setExpenses} = useContext(ExpensesContext)
@@ -19,8 +22,9 @@ function ExpenseItem(props) {
             <ExpenseDate date={props.date}/>
             <div className="expense-item__description">
                 <h2>{props.title}</h2>
+                <UpdateModal id = {props.myKey}>📤</UpdateModal>
+                <Button onClick={() => onDeleteHandler(props.myKey)}>❌</Button>
                 <div className="expense-item__price">${props.amount}</div>
-                <button onClick={() => onDeleteHandler(props.myKey)}>❌</button>
             </div>
         </Card>
     )
