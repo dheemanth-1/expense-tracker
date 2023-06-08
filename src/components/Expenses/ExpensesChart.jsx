@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import Chart from "../Chart/Chart"
+// import Chart from "../Chart/Chart"
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip} from 'recharts'
 
 const ExpensesChart = props => {
     const chartDataPoints = [{label: 'Jan', value: 0},
@@ -22,7 +23,16 @@ const ExpensesChart = props => {
         chartDataPoints[expenseMonth].value += expense.amount
     } 
     
-    return <Chart dataPoints={chartDataPoints}/>
+    return <>
+               {/*<Chart dataPoints={chartDataPoints}/>*/}
+               <BarChart width={730} height={250} data={chartDataPoints}>
+                    <CartesianGrid strokeDasharray="3 3" fill="#242424"/>
+                    <XAxis dataKey='label' />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey='value' fill="#8884d8" />
+                </BarChart>
+           </>
 }
 
 export default ExpensesChart
