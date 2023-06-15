@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { ExpensesContext } from '../../App';
+import axios from '../../APIs/posts';
 
 const style = {
   position: 'absolute',
@@ -45,20 +46,29 @@ const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value)
 }
 
-const handleUpdate = (event) => {
+const handleUpdate = async (event) => {
     event.preventDefault();
 
         const expenseData = {
+            id: props.id,
             title: enteredTitle,
             amount: +enteredAmount,
-            date: new Date(enteredDate),
-            id: Math.random().toString()
+            date: new Date(enteredDate)
         }
-
-    handleClose()
+    
+    let sendingExpenseData = {...expenseData}
+    sendingExpenseData.date = sendingExpenseData.date.toISOString().slice(0, 10)
+    try {
+    const response = await axios.put(`/posts/${props.id}`, sendingExpenseData)
+    console.log(response.data)
     setExpenses(expenses.filter((expense)=>expense.id != props.id))
     setExpenses((prevExpenses)=>
                  {return [expenseData, ...prevExpenses]})
+  
+    } catch (err) {
+      console.log(`Error:${err.message}`)
+    }
+    handleClose()
 }
 
   return (
@@ -85,7 +95,7 @@ const handleUpdate = (event) => {
                 </div>
                 <div className = "new-expense__control">
                     <label >Date:</label>
-                    <input type='date' min='2020-01-01' max='2025-12-31' value={enteredDate.toISOString().slice(0, 10)} onChange={dateChangeHandler}/>
+                    <input type='date' min='2020-01-01' max='2025-12-31' onChange={dateChangeHandler}/>
                 </div>
             </div>
             <div className='new-expense__actions'>

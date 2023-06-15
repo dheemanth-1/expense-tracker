@@ -6,14 +6,22 @@ import ExpenseDate from './ExpenseDate'
 import Card from '../UI/Card'
 import {Button} from '@mui/material'
 import UpdateModal from './UpdateModal'
+import axios from '../../APIs/posts'
+
 
 function ExpenseItem(props) {
 
     const {expenses, setExpenses} = useContext(ExpensesContext)
 
-    const onDeleteHandler = (id) => {
+    const onDeleteHandler = async (id) => {
+        
         if (confirm("Delete Item?") === true) {
-            setExpenses(expenses.filter((expense)=>expense.id != id))
+            try {
+                await axios.delete(`/posts/${id}`)
+                setExpenses(expenses.filter((expense)=>expense.id != id))
+            } catch (err) {
+                console.log(`Error: ${err.message}`)
+            }
         }
     }
     

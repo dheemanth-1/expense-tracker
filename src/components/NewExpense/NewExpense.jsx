@@ -1,6 +1,7 @@
 import ExpenseForm from './ExpenseForm'
 import './NewExpense.css'
 import {useState} from 'react'
+import axios from '../../APIs/posts'
 
 const NewExpense = (props) => {
     const [isEditing, setIsEditing] = useState(false)
@@ -14,15 +15,29 @@ const NewExpense = (props) => {
     }
 
 
-    const saveExpenseDataHandler = (enteredExpenseData) => {
+    const saveExpenseDataHandler = async (enteredExpenseData) => {
         const expenseData = {
-            ...enteredExpenseData,
-            id: Math.random().toString()
+            id: Math.floor(Math.random() * 1_000_000_000).toString(),
+            ...enteredExpenseData
         }
         // eslint-disable-next-line react/prop-types
         props.onAddExpense(expenseData)
+
+        let sendingExpenseData = {...expenseData}
+        
+        sendingExpenseData.date = sendingExpenseData.date.toISOString().slice(0, 10)
+        try {
+        const response = await axios.post('/posts', sendingExpenseData)
+        console.log(response.data)
+        }
+        catch (err) {
+            console.log(`Error: ${err.message}`)
+        }
+        
         setIsEditing(false)
     }
+       
+    
     
     return (
         <div className="new-expense">
