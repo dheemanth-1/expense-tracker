@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL:' http://localhost:3500'
+    baseURL: import.meta.env.VITE_JSON_SERVER_URL
 })
 
 // export const getPosts = async () => {
