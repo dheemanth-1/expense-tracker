@@ -34,6 +34,8 @@ export default function UpdateModal(props) {
 
   const [enteredDate, setEnteredDate] = React.useState(updatingExpense.date)
 
+  const displayDate = new Date(enteredDate).toISOString().slice(0, 10)
+
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value)
   }
@@ -73,7 +75,7 @@ const handleUpdate = async (event) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}><img width="16" height="16" src="https://img.icons8.com/office/16/available-updates.png" alt="available-updates"/></Button>
+      <Button onClick={handleOpen} size='small'><img width="48" height="48" src="https://img.icons8.com/fluency/48/edit.png" alt="edit"/></Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -95,7 +97,7 @@ const handleUpdate = async (event) => {
                 </div>
                 <div className = "new-expense__control">
                     <label >Date:</label>
-                    <input type='date' min='2020-01-01' max='2025-12-31' onChange={dateChangeHandler}/>
+                    <input type='date' min='2020-01-01' max='2025-12-31' value={displayDate} onChange={dateChangeHandler}/>
                 </div>
             </div>
             <div className='new-expense__actions'>

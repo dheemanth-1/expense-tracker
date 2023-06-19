@@ -30,7 +30,7 @@ function ExpenseItem(props) {
             <ExpenseDate date={props.date}/>
             <div className="expense-item__description">
                 <h2>{props.title}</h2>
-                <UpdateModal id = {props.myKey}>📤</UpdateModal>
+                <UpdateModal id = {props.myKey} />
                 <Button onClick={() => onDeleteHandler(props.myKey)}>❌</Button>
                 <div className="expense-item__price">${props.amount}</div>
             </div>
