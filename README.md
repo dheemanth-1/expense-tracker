@@ -1,5 +1,8 @@
 # expense-tracker
 Practice project of expense tracker written in javascript, which can read, create, update and delete data stored in an external JSOON file through APIs.
+Here's how it looks:
+
+![Screenshot 2023-06-08 063928](https://github.com/dheemanth-1/expense-tracker/assets/136865272/460e1560-c83b-48e8-9840-e7912f786ebf)
 
 ## How to use:
 To run the code locally, run ```npm install``` in the command line after downloading the repository. This will download all the required dependencies. 
